@@ -1,0 +1,88 @@
+/* Reset */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+user-select: none;
+}
+
+header {
+    height: 60px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(230, 230, 143);
+}
+
+.mr10 {
+    margin-right: 10px;
+}
+
+#difficulty {
+    background-color: yellow;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+#playbtn {
+    background-color: yellow;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+#playbtn:hover {
+    background-color: rgb(255, 255, 123);
+    cursor: pointer;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    background-color: lightseagreen;
+}
+
+.container {
+    width: 800px;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.box {
+    border: 1px solid black;
+    width: calc(100% / 10);
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boxmed {
+    border: 1px solid black;
+    width: calc(100% / 9);
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boxhard {
+    border: 1px solid black;
+    width: calc(100% / 7);
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+.click {
+    background-color: aqua;
+}
+
+.hidden {
+    display: none;
+}
