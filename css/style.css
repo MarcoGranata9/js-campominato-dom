@@ -43,7 +43,7 @@ header {
 }
 
 .container {
-    width: 800px;
+    width: 750px;
     margin: 20px auto;
     display: flex;
     flex-wrap: wrap;
@@ -79,10 +79,19 @@ header {
     align-items: center;    
 }
 
+.bomb {
+    background-color: red;
+}
+
 .click {
     background-color: aqua;
 }
 
 .hidden {
     display: none;
+}
+
+#message {
+    text-align: center;
+    color: white;
 }

@@ -1,7 +1,9 @@
 const playbtn = document.getElementById("playbtn")
 const container = document.querySelector(".container")
 const difficultyElem = document.getElementById("difficulty")
+const message = document.getElementById("message")
 let bombs = [];
+let notbombs = [];
 
 playbtn.addEventListener("click", function(event) {
     event.preventDefault()
@@ -9,41 +11,50 @@ playbtn.addEventListener("click", function(event) {
     container.classList.remove("hidden")
     const difficulty = difficultyElem.value
     console.log(difficulty);
-    bombs = [];
 
+    bombs = [];
+    console.log(bombs);
     switch (difficulty) {
-        case "hard":
-            for (let i = 1; i <= 49; i++) {
-                generateBombs(49)
-                const winNumber = 49 - bombs.length; 
-                const cell = generateCell(i, "boxhard")
-                cell.addEventListener("click", generateStyleNumLog)
-                container.append(cell)  
-            } 
-            break;
-        case "medium":
-            for (let i = 1; i <= 81; i++) {
-                generateBombs(81)
-                const winNumber = 81 - bombs.length;
-                const cell = generateCell(i, "boxmed")
-                cell.addEventListener("click", generateStyleNumLog)
-                container.append(cell)  
-            } 
-            break;
-        default: "easy"
-            for (let i = 1; i <= 100; i++) {
-                generateBombs(100)
-                const winNumber = 100 - bombs.length;
-                const cell = generateCell(i, "box")
-                cell.addEventListener("click", generateStyleNumLog)
-                container.append(cell)  
-            }  
-            break;
+        case "hard":  playGame(49); break;
+        case "medium": playGame(81); break;
+        default: playGame(100);
     }
 })
 
 
+function playGame(num) {
 
+    for (let i = 1; i <= num; i++) {
+        generateBombs(num)
+        const winNumber = num - bombs.length;
+        console.log(winNumber);
+        switch (difficultyElem.value) {
+            case "hard": cellClass = "boxhard"; break;
+            case "medium": cellClass = "boxmed"; break;
+            default: cellClass = "box";
+        }
+        const cell = generateCell(i, `${cellClass}`)
+        cell.addEventListener("click", function() {
+            const cellnumber = parseInt(this.textContent);
+            if (bombs.includes(cellnumber)) {
+                this.classList.add("bomb")
+                message.innerHTML = (`HAI PERSO HAI TROVATO ${notbombs.length} CASELLE SENZA BOMBA`);
+                console.log(notbombs.length);
+            } else {
+                this.classList.add("click")
+        
+                if (!notbombs.includes(cellnumber)) {
+                    notbombs.push(cellnumber)
+                }
+
+                if (notbombs.length === winNumber) {
+                    message.innerHTML = (`HAI VINTO HAI TROVATO TUTTE LE ${notbombs.length} CASELLE SENZA BOMBA`);
+                }
+            }
+        })
+        container.append(cell)  
+    } 
+}
 
 // Functions
 /**
@@ -60,16 +71,6 @@ function generateCell(number, string) {
 }
 
 /**
- * Funzione che aggiunge una classe e stampa in console il testo come numero
- * @param {any}
- * @returns {any}
- */
-function generateStyleNumLog() {
-    this.classList.add("click")
-    console.log(parseInt(this.textContent));
-}
-
-/**
  * Funzione che genera 16 numeri casuali diversi in un array 
  * @param {number} cellmaxnumber
  * @returns {array}
@@ -81,5 +82,5 @@ function generateBombs(cellmaxnumber) {
             bombs.push(rndNumber)            
         }
     }
-    return bombs
 }
+
