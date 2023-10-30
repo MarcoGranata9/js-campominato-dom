@@ -34,24 +34,32 @@ function playGame(num) {
             default: cellClass = "box";
         }
         const cell = generateCell(i, `${cellClass}`)
-        cell.addEventListener("click", function() {
-            const cellnumber = parseInt(this.textContent);
-            if (bombs.includes(cellnumber)) {
-                this.classList.add("bomb")
-                message.innerHTML = (`HAI PERSO HAI TROVATO ${notbombs.length} CASELLE SENZA BOMBA`);
-                console.log(notbombs.length);
-            } else {
-                this.classList.add("click")
+        cell.addEventListener("click", cellClick) 
+        //     const cellnumber = parseInt(this.textContent);
+        //     if (bombs.includes(cellnumber)) {
+        //         this.classList.add("bomb")
+        //         message.innerHTML = (`HAI PERSO HAI TROVATO ${notbombs.length} CASELLE SENZA BOMBA`);
+        //         const allCells = document.querySelectorAll(`.${cellClass}`)
+        //         for (let i = 0; i < allCells.length; i++) {
+        //             const cells = allCells[i]
+        //             if (bombs.includes(parseInt(cells.textContent))) {
+        //                 cells.classList.add("bomb")
+        //             }
+                    
+        //         }
+        //     } else {
+        //         this.classList.add("click")
         
-                if (!notbombs.includes(cellnumber)) {
-                    notbombs.push(cellnumber)
-                }
+        //         if (!notbombs.includes(cellnumber)) {
+        //             notbombs.push(cellnumber)
+        //         }
 
-                if (notbombs.length === winNumber) {
-                    message.innerHTML = (`HAI VINTO HAI TROVATO TUTTE LE ${notbombs.length} CASELLE SENZA BOMBA`);
-                }
-            }
-        })
+        //         if (notbombs.length === winNumber) {
+        //             message.innerHTML = (`HAI VINTO HAI TROVATO TUTTE LE ${notbombs.length} CASELLE SENZA BOMBA`);
+        //         }
+        //     }
+        // })
+        // container.append(cell)
         container.append(cell)  
     } 
 }
@@ -84,3 +92,30 @@ function generateBombs(cellmaxnumber) {
     }
 }
 
+function cellClick() {
+    const cellnumber = parseInt(this.textContent);
+    console.log(cellnumber);
+    if (bombs.includes(cellnumber)) {
+        this.classList.add("bomb")
+        message.innerHTML = (`HAI PERSO HAI TROVATO ${notbombs.length} CASELLE SENZA BOMBA`);
+        const allCells = document.querySelectorAll(`.${cellClass}`)
+        for (let i = 0; i < allCells.length; i++) {
+            const cells = allCells[i]
+            cells.removeEventListener("click", cellClick)
+            if (bombs.includes(parseInt(cells.textContent))) {
+                cells.classList.add("bomb")
+            }
+            
+        }
+    } else {
+        this.classList.add("click")
+
+        if (!notbombs.includes(cellnumber)) {
+            notbombs.push(cellnumber)
+        }
+
+        if (notbombs.length === winNumber) {
+            message.innerHTML = (`HAI VINTO HAI TROVATO TUTTE LE ${notbombs.length} CASELLE SENZA BOMBA`);
+        }
+    }  
+}
