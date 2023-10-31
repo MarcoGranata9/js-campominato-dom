@@ -13,6 +13,7 @@ playbtn.addEventListener("click", function(event) {
     console.log(difficulty);
 
     bombs = [];
+    notbombs = [];
     console.log(bombs);
     switch (difficulty) {
         case "hard":  playGame(49); break;
@@ -35,31 +36,6 @@ function playGame(num) {
         }
         const cell = generateCell(i, `${cellClass}`)
         cell.addEventListener("click", cellClick) 
-        //     const cellnumber = parseInt(this.textContent);
-        //     if (bombs.includes(cellnumber)) {
-        //         this.classList.add("bomb")
-        //         message.innerHTML = (`HAI PERSO HAI TROVATO ${notbombs.length} CASELLE SENZA BOMBA`);
-        //         const allCells = document.querySelectorAll(`.${cellClass}`)
-        //         for (let i = 0; i < allCells.length; i++) {
-        //             const cells = allCells[i]
-        //             if (bombs.includes(parseInt(cells.textContent))) {
-        //                 cells.classList.add("bomb")
-        //             }
-                    
-        //         }
-        //     } else {
-        //         this.classList.add("click")
-        
-        //         if (!notbombs.includes(cellnumber)) {
-        //             notbombs.push(cellnumber)
-        //         }
-
-        //         if (notbombs.length === winNumber) {
-        //             message.innerHTML = (`HAI VINTO HAI TROVATO TUTTE LE ${notbombs.length} CASELLE SENZA BOMBA`);
-        //         }
-        //     }
-        // })
-        // container.append(cell)
         container.append(cell)  
     } 
 }
