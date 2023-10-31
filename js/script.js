@@ -4,6 +4,7 @@ const difficultyElem = document.getElementById("difficulty")
 const message = document.getElementById("message")
 let bombs = [];
 let notbombs = [];
+let winNumber
 
 playbtn.addEventListener("click", function(event) {
     event.preventDefault()
@@ -16,7 +17,7 @@ playbtn.addEventListener("click", function(event) {
     notbombs = [];
     console.log(bombs);
     switch (difficulty) {
-        case "hard":  playGame(49); break;
+        case "hard":  playGame(17); break;
         case "medium": playGame(81); break;
         default: playGame(100);
     }
@@ -27,13 +28,16 @@ function playGame(num) {
 
     for (let i = 1; i <= num; i++) {
         generateBombs(num)
-        const winNumber = num - bombs.length;
-        console.log(winNumber);
+
         switch (difficultyElem.value) {
             case "hard": cellClass = "boxhard"; break;
             case "medium": cellClass = "boxmed"; break;
             default: cellClass = "box";
         }
+
+        winNumber = num - bombs.length;
+        console.log(winNumber);
+
         const cell = generateCell(i, `${cellClass}`)
         cell.addEventListener("click", cellClick) 
         container.append(cell)  
